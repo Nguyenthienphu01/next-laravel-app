@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Api\V1\Controllers\Product\ProductController;
+use App\Http\Api\V1\Controllers\FlashcardController;
+use App\Http\Api\V1\Controllers\SetController;
 use App\Http\Api\V1\Controllers\System\HistoryController;
 
 /*
@@ -35,5 +36,10 @@ Route::group([
 
         // System 
         Route::get('/history', [HistoryController::class, 'getHistory']);
+
+        // Library
+
+        Route::post('/translate', [FlashcardController::class, 'translate']);
+        // Route::get('/set', [SetController::class, '']);
     });
 });

@@ -1,11 +1,9 @@
 <template>
-  <h1>Thư viện của bạn</h1>
+  <h1>Flash Card</h1>
 </template>
 
-<script>
-export default {
+<script setup lang="ts">
 
-}
 </script>
 
 <style>
