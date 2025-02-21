@@ -1,0 +1,17 @@
+# Ignore Laravel vendor
+backend/vendor/
+backend/node_modules/
+backend/storage/
+
+# Ignore Vue node_modules and build files
+frontend/node_modules/
+frontend/dist/
+
+# Ignore environment files
+*.env
+*.env.*
+
+# Ignore system files
+.DS_Store
+.idea/
+.vscode/
