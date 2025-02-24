@@ -39,7 +39,8 @@ Route::group([
 
         // Library
 
-        Route::post('/translate', [FlashcardController::class, 'translate']);
-        // Route::get('/set', [SetController::class, '']);
+        Route::post('sets', [FlashcardController::class, 'createSet']);
+        Route::get('sets/{id}', [FlashcardController::class, 'getSet']);
+        Route::post('flashcards', [FlashcardController::class, 'store']);
     });
 });
