@@ -9,7 +9,14 @@ class Flashcard extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['set_id', 'term', 'definition', 'image'];
+    protected $fillable = [
+        'set_id',
+        'title',
+        'description',
+        'term',
+        'definition',
+        'image'
+    ];
 
     public function set()
     {

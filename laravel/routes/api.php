@@ -39,8 +39,6 @@ Route::group([
 
         // Library
 
-        Route::post('sets', [FlashcardController::class, 'createSet']);
-        Route::get('sets/{id}', [FlashcardController::class, 'getSet']);
-        Route::post('flashcards', [FlashcardController::class, 'store']);
+        Route::post('/flashcards', [FlashcardController::class, 'store']);
     });
 });
