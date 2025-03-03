@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useState } from 'react';
 import { Input } from '../common/Input';
 import { Button } from '../common/Button';
@@ -9,11 +9,19 @@ export const LoginForm = () => {
     email: '',
     password: ''
   });
-  const { login, isLoading } = useAuth();
+  const { login, isLoading, error } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await login(formData);
+    if (!formData.email || !formData.password) {
+      console.error('Email and password are required');
+      return;
+    }
+    try {
+      await login(formData);
+    } catch (err) {
+      console.error('Login failed:', err);
+    }
   };
 
   return (
@@ -38,6 +46,7 @@ export const LoginForm = () => {
           password: e.target.value
         }))}
       />
+      {error && <p className="text-red-500 text-sm">{error}</p>}
       <Button type="submit" isLoading={isLoading}>
         Sign in
       </Button>
