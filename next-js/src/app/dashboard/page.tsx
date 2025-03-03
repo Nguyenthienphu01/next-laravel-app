@@ -1,17 +1,14 @@
 'use client';
+
 import React from 'react';
 import { useAuth } from '@/hooks/auth/useAuth';
-import { useRouter } from 'next/navigation';
 
 const Dashboard = () => {
     
-  const router = useRouter();
-
   const { logout, isLoading, error } = useAuth();
 
   const handleLogout = async () => {
     await logout();
-    router.push('auth/login');
   };
 
   return (

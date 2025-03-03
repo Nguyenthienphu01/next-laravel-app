@@ -48,6 +48,7 @@ export function useAuth() {
     setError(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    router.push('auth/login');
   };
 
   return { user, token, login, logout, isLoading, error };
