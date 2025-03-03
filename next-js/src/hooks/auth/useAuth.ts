@@ -1,30 +1,41 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { login as apiLogin } from '@/services/api';
 import { useRouter } from 'next/navigation';
-import { login } from '@/services/api';
+
+interface Credentials {
+  email: string;
+  password: string;
+}
 
 export function useAuth() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const login = async (credentials: { email: string; password: string }) => {
+  const login = async (credentials: Credentials) => {
     setIsLoading(true);
     setError(null);
     try {
       const { email, password } = credentials;
-      const response = await login(email, password);
-      const { token, user } = response;
-      setToken(token);
-      setUser(user);
+      const response = await apiLogin(email, password);
+
+      const responses = response.data;
+
+      const { token, user } = responses;
+
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       router.push('/dashboard');
-    } catch (err) {
-      setError(err.message || 'Login failed');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || 'Login failed');
+      } else {
+        setError('Login failed');
+      }
       throw err;
     } finally {
       setIsLoading(false);
